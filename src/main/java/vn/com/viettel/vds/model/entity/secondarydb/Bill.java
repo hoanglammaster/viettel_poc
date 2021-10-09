@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,6 +20,7 @@ public class Bill implements Serializable {
 
     @Id
     @Column(name = "bill_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "table_id")
     private Integer tableId;
@@ -33,4 +31,10 @@ public class Bill implements Serializable {
     @Column(name = "price")
     private BigDecimal price;
 
+    public Bill(Integer tableId, Date entryTime, Date outTime, BigDecimal totalPrice) {
+        this.tableId = tableId;
+        this.entryTime = entryTime;
+        this.outTime = outTime;
+        this.price = totalPrice;
+    }
 }

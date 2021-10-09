@@ -1,9 +1,9 @@
-package vn.com.viettel.vds.model.mapper;
+package vn.com.viettel.vds.model.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class JsonMapper<E> {
+public class JsonConverter<E> {
 
     private E e;
 

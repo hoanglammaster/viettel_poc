@@ -2,8 +2,10 @@ package vn.com.viettel.vds.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+import org.springframework.data.redis.core.RedisHash;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -11,16 +13,16 @@ import java.util.Date;
 @AllArgsConstructor
 @Setter
 @Getter
-public class BillDTO {
+@RedisHash
+@EqualsAndHashCode
+public class BillDTO implements Serializable {
 
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
+    private static final long serialVersionUID = -3354243364607930472L;
+
     private Integer tableId;
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd@HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd@HH:mm:ss")
     private Date entryTime;
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd@HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd@HH:mm:ss")
     private Date outTime;
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private BigDecimal totalPrice;
 }
