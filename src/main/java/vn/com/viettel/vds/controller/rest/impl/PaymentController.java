@@ -22,7 +22,7 @@ public class PaymentController implements PaymentInterface {
         if(paymentService.payTheBill(id)){
             return ResponseEntity.ok("Payment success");
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Payment failed");
+            return ResponseEntity.badRequest().body("Payment failed");
         }
     }
 }

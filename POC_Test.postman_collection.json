@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "a4d7726b-ff29-4e2e-9d63-c28c9346ac39",
+		"name": "POC_Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add 1st order - success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"add success 1st order\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.name).to.eql(\"California Pizza Kitchen: Original BBQ Chicken Pizza\");\r",
+							"    pm.expect(responseJson.description).to.eql(\"the name of the dish\");\r",
+							"    pm.expect(responseJson.price).to.eql(110);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"table-id\": 100,\r\n    \"food-id\":1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/order/food",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"order",
+						"food"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add 2nd order - success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"add success 2nd order\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.name).to.eql(\"Golden Corral: A Blue-Plate Tie\");\r",
+							"    pm.expect(responseJson.description).to.eql(\"the name of the dish\");\r",
+							"    pm.expect(responseJson.price).to.eql(80);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"table-id\": 100,\r\n    \"food-id\":1005\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/order/food",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"order",
+						"food"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add 3rd order invalid table id - failed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"add order failed with table id 1000\", function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.body(\"Table not exist\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"table-id\": 1000,\r\n    \"food-id\":1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/order/food",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"order",
+						"food"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add 4th order  invalid food id - failed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"add order failed with food id 999\", function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.body(\"Food id not exist\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"table-id\": 100,\r\n    \"food-id\":999\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/order/food",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"order",
+						"food"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payment incorect table id - failed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"payment failed with incorrect table id\", function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.body(\"Payment failed\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/payment/pay/101",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"payment",
+						"pay",
+						"101"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payment - success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"payment success with correct table id and exist bill\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.body(\"Payment success\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/payment/pay/100",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"payment",
+						"pay",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payment  not exist bill and correct table id - failed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"payment failed with correct table id but not exist bill\", function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.body(\"Payment failed\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/payment/pay/100",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"payment",
+						"pay",
+						"100"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"postman.setNextRequest(\"add 1st order - success\");",
+					"postman.setNextRequest(\"add 2nd order - success\");",
+					"postman.setNextRequest(\"add 3rd order invalid table id - failed\");",
+					"postman.setNextRequest(\"add 4th order  invalid food id - failed\");",
+					"postman.setNextRequest(\"payment incorect table id - failed\");",
+					"postman.setNextRequest(\"payment - success\");",
+					"postman.setNextRequest(\"payment  not exist bill and correct table id - failed\");",
+					"postman.setNextRequest(null);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:8080/api/v1"
+		},
+		{
+			"value": ""
+		}
+	]
+}
