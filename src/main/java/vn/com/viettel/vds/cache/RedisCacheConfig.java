@@ -46,7 +46,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
 
     @Bean
     public RedisCacheConfiguration cacheConfiguration(RedisCacheConfigurationProperties properties) {
-        return createCacheConfiguration(properties.getTimeoutSeconds());
+        return createCacheConfiguration(properties.getTimeToLife());
     }
 
     @Bean

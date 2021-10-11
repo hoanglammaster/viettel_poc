@@ -21,16 +21,13 @@ public class OrderService {
 
     //url for public api
     private final String API_URL = "https://my-json-server.typicode.com/hoanglammaster/db_json_server/listFood/";
-    private final RestTemplate restTemplate;
-    private final FoodValidator foodValidator;
-    private final CacheBillService cacheBillService;
-
     @Autowired
-    public OrderService(RestTemplate restTemplate, FoodValidator foodValidator, CacheBillService cacheBillService) {
-        this.restTemplate = restTemplate;
-        this.foodValidator = foodValidator;
-        this.cacheBillService = cacheBillService;
-    }
+    private RestTemplate restTemplate;
+    @Autowired
+    private FoodValidator foodValidator;
+    @Autowired
+    private CacheBillService cacheBillService;
+
 
     /**
      * => get food from public api using rest template
@@ -64,6 +61,7 @@ public class OrderService {
      * @param foodPrice
      */
     private void addBillToCache(Integer tableId, BigDecimal foodPrice) {
+        log.info("GET FROM CACHE");
         Optional<byte[]> billArray = Optional.ofNullable(cacheBillService.getFromCache(tableId));
         if (billArray.isPresent() && !billArray.isEmpty()) {
             BillDTO bill = (BillDTO) SerializationUtils.deserialize(billArray.get());

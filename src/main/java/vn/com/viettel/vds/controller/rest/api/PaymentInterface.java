@@ -10,6 +10,11 @@ import org.springframework.web.servlet.function.EntityResponse;
 @RequestMapping("api/v1/payment")
 public interface PaymentInterface {
 
+    /**
+     * => pay the bill
+     * @param id
+     * @return
+     */
     @GetMapping(
             path = "/pay/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE

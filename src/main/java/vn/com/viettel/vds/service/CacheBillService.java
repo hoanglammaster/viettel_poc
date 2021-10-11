@@ -19,6 +19,7 @@ public class CacheBillService {
      */
     @CachePut(cacheNames = "bill", key = "#billDTO.tableId", cacheManager = "redisCacheManager")
     public byte[] setToCache(BillDTO billDTO){
+        log.info("Set Bill to cache with data: {}", billDTO.toString());
         return SerializationUtils.serialize(billDTO);
     }
 
@@ -29,10 +30,12 @@ public class CacheBillService {
      */
     @Cacheable(cacheNames = "bill", key = "#id",cacheManager = "redisCacheManager")
     public byte[] getFromCache(Integer id){
+        log.info("Return null when get not exist Bill by table id {} from cache", id);
         return null;
     }
 
     @CacheEvict(cacheNames = "bill", key = "#id", cacheManager = "redisCacheManager")
     public void removeFromCache(Integer id){
+        log.info("Remove Bill with table id {} from cache", id);
     }
 }

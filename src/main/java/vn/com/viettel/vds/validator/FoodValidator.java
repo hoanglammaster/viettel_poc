@@ -10,7 +10,7 @@ public class FoodValidator {
     private final Integer MAX_FOOD_ID = 2000;
 
     /**
-     * => validate food id in range 0 - 500
+     * => validate food id in range 999-2000
      * @param id
      * @return
      */

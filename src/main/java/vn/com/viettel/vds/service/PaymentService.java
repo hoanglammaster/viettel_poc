@@ -1,6 +1,7 @@
 package vn.com.viettel.vds.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.SerializationUtils;
 import vn.com.viettel.vds.dto.BillDTO;
@@ -19,6 +20,7 @@ public class PaymentService {
     private final CacheBillService cacheBillService;
     private final BillRepository billRepository;
 
+    @Autowired
     public PaymentService(CacheBillService cacheBillService, BillRepository billRepository) {
         this.cacheBillService = cacheBillService;
         this.billRepository = billRepository;
